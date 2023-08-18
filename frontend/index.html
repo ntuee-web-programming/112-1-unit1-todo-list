@@ -3,34 +3,29 @@
   <head>
     <title>todo list</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="index.js"></script>
   </head>
   <body>
     <h1>todo list</h1>
-    <form id="todo-input-container">
-      <input type="text" id="todo-input" placeholder="new todo" />
-      <button id="todo-add">add</button>
-    </form>
-    <form id="todos">
-      <details class="todo-item">
-        <summary>
-          <div>
-            <input id="1" type="checkbox" />
-            <p class="todo-title">todo 1</p>
-          </div>
-          <button>delete</button>
-        </summary>
-        <p class="todo-description">todo 1 description</p>
-      </details>
-    </form>
+    <div id="todo-input-container">
+      <input type="text" id="todo-input" placeholder="new todo" tabindex="1" />
+      <button id="todo-add" tabindex="3">add</button>
+    </div>
+    <textarea
+      id="todo-description-input"
+      placeholder="description"
+      tabindex="2"
+    ></textarea>
+    <section id="todos"></section>
   </body>
   <template id="todo-item-template">
-    <details class="todo-item">
+    <details id="" class="todo-item">
       <summary>
         <div>
-          <input id="1" type="checkbox" />
+          <input data-id="" type="checkbox" />
           <p class="todo-title">todo 1</p>
         </div>
-        <button>delete</button>
+        <button data-id="" class="delete-todo">delete</button>
       </summary>
       <p class="todo-description">todo 1 description</p>
     </details>
