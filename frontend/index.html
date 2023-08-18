@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>todo list</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>todo list</h1>
+    <form id="todo-input-container">
+      <input type="text" id="todo-input" placeholder="new todo" />
+      <button id="todo-add">add</button>
+    </form>
+    <form id="todos">
+      <details class="todo-item">
+        <summary>
+          <div>
+            <input id="1" type="checkbox" />
+            <p class="todo-title">todo 1</p>
+          </div>
+          <button>delete</button>
+        </summary>
+        <p class="todo-description">todo 1 description</p>
+      </details>
+    </form>
+  </body>
+  <template id="todo-item-template">
+    <details class="todo-item">
+      <summary>
+        <div>
+          <input id="1" type="checkbox" />
+          <p class="todo-title">todo 1</p>
+        </div>
+        <button>delete</button>
+      </summary>
+      <p class="todo-description">todo 1 description</p>
+    </details>
+  </template>
+</html>
