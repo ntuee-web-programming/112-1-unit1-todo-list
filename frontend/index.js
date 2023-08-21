@@ -68,11 +68,6 @@ function createTodoElement(todo) {
   return item;
 }
 
-// helper functions
-function uuid() {
-  return crypto.randomUUID();
-}
-
 async function getTodos() {
   const response = await fetch(`${apiRoot}/todos`);
   const data = await response.json();
@@ -91,6 +86,7 @@ async function createTodo(todo) {
   return data;
 }
 
+// eslint-disable-next-line no-unused-vars
 async function updateTodoStatus(id, todo) {
   const response = await fetch(`${apiRoot}/todos/${id}`, {
     method: "PUT",

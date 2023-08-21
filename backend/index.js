@@ -1,18 +1,19 @@
-import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import express from "express";
 import { v4 as uuid } from "uuid";
+
 import { db } from "./db.js";
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/heartbeat", (req, res) => {
+app.get("/heartbeat", (_, res) => {
   return res.send({ message: "Hello World!" });
 });
 
-app.get("/api/todos", (req, res) => {
+app.get("/api/todos", (_, res) => {
   return res.status(200).json(db.todos);
 });
 
@@ -79,5 +80,5 @@ app.delete("/api/todos/:id", (req, res) => {
 
 const port = process.env.PORT || 5000;
 app.listen(5000, () =>
-  console.log(`Server running on port http://localhost:${port}`)
+  console.log(`Server running on port http://localhost:${port}`),
 );
