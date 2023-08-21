@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 import { db } from "./db.js";
 
 const app = express();
