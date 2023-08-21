@@ -1,26 +1,11 @@
 const itemTemplate = document.querySelector("#todo-item-template");
 const todoList = document.querySelector("#todos");
+const apiRoot = "http://localhost:5000/api";
 
-const todos = [
-  {
-    id: uuid(),
-    title: "Todo 1",
-    description: "This is the first todo",
-    completed: false,
-  },
-  {
-    id: uuid(),
-    title: "Todo 2",
-    description: "This is the second todo",
-    completed: true,
-  },
-];
-
-function main() {
+async function main() {
   setupEventListeners();
-  todos.forEach((todo) => {
-    renderTodoItem(todo);
-  });
+  const todos = await getTodos();
+  todos.forEach((todo) => renderTodo(todo));
 }
 
 function setupEventListeners() {
@@ -29,35 +14,42 @@ function setupEventListeners() {
   const todoDescriptionInput = document.querySelector(
     "#todo-description-input"
   );
-  addTodoButton.addEventListener("click", () => {
-    if (!todoInput.value) {
+  addTodoButton.addEventListener("click", async () => {
+    const title = todoInput.value;
+    const description = todoDescriptionInput.value;
+    if (!title) {
       alert("Please enter a todo title!");
       return;
     }
-    const todo = {
-      id: uuid(),
-      title: todoInput.value,
-      description: todoDescriptionInput.value,
-      completed: false,
-    };
+    if (!description) {
+      alert("Please enter a todo description!");
+      return;
+    }
+    const todo = await createTodo({ title, description });
     todoInput.value = "";
     todoDescriptionInput.value = "";
-    renderTodoItem(todo);
+    renderTodo(todo);
   });
 }
 
-function deleteTodoItem(id) {
-  const todo = document.getElementById(id);
-  todo.remove();
-  console.log(`Deleted todo with id: ${id}`);
+async function deleteTodoElement(id) {
+  try {
+    await deleteTodoById(id);
+  } catch (error) {
+    console.log(error);
+    alert("Failed to delete todo!");
+  } finally {
+    const todo = document.getElementById(id);
+    todo.remove();
+  }
 }
 
-function renderTodoItem(todo) {
-  const item = createTodoItem(todo);
+function renderTodo(todo) {
+  const item = createTodoElement(todo);
   todoList.appendChild(item);
 }
 
-function createTodoItem(todo) {
+function createTodoElement(todo) {
   const item = itemTemplate.content.cloneNode(true);
   const container = item.querySelector(".todo-item");
   container.id = todo.id;
@@ -71,13 +63,52 @@ function createTodoItem(todo) {
   const deleteButton = item.querySelector("button.delete-todo");
   deleteButton.dataset.id = todo.id;
   deleteButton.addEventListener("click", () => {
-    deleteTodoItem(todo.id);
+    deleteTodoElement(todo.id);
   });
   return item;
 }
 
+// helper functions
 function uuid() {
   return crypto.randomUUID();
+}
+
+async function getTodos() {
+  const response = await fetch(`${apiRoot}/todos`);
+  const data = await response.json();
+  return data;
+}
+
+async function createTodo(todo) {
+  const response = await fetch(`${apiRoot}/todos`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todo),
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function updateTodoStatus(id, todo) {
+  const response = await fetch(`${apiRoot}/todos/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todo),
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function deleteTodoById(id) {
+  const response = await fetch(`${apiRoot}/todos/${id}`, {
+    method: "DELETE",
+  });
+  const data = await response.json();
+  return data;
 }
 
 main();
