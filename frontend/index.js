@@ -12,7 +12,7 @@ function setupEventListeners() {
   const addTodoButton = document.querySelector("#todo-add");
   const todoInput = document.querySelector("#todo-input");
   const todoDescriptionInput = document.querySelector(
-    "#todo-description-input"
+    "#todo-description-input",
   );
   addTodoButton.addEventListener("click", async () => {
     const title = todoInput.value;
