@@ -1,6 +1,6 @@
 const itemTemplate = document.querySelector("#todo-item-template");
 const todoList = document.querySelector("#todos");
-const apiRoot = "http://localhost:5000/api";
+const apiRoot = "http://localhost:8000/api";
 
 async function main() {
   setupEventListeners();
