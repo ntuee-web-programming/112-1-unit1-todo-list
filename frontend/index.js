@@ -1,6 +1,10 @@
+/* global axios */
 const itemTemplate = document.querySelector("#todo-item-template");
 const todoList = document.querySelector("#todos");
-const apiRoot = "http://localhost:8000/api";
+
+const instance = axios.create({
+  baseURL: "http://localhost:8000/api",
+});
 
 async function main() {
   setupEventListeners();
@@ -77,42 +81,24 @@ function createTodoElement(todo) {
 }
 
 async function getTodos() {
-  const response = await fetch(`${apiRoot}/todos`);
-  const data = await response.json();
-  return data;
+  const response = await instance.get("/todos");
+  return response.data;
 }
 
 async function createTodo(todo) {
-  const response = await fetch(`${apiRoot}/todos`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(todo),
-  });
-  const data = await response.json();
-  return data;
+  const response = await instance.post("/todos", todo);
+  return response.data;
 }
 
 // eslint-disable-next-line no-unused-vars
 async function updateTodoStatus(id, todo) {
-  const response = await fetch(`${apiRoot}/todos/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(todo),
-  });
-  const data = await response.json();
-  return data;
+  const response = await instance.put(`/todos/${id}`, todo);
+  return response.data;
 }
 
 async function deleteTodoById(id) {
-  const response = await fetch(`${apiRoot}/todos/${id}`, {
-    method: "DELETE",
-  });
-  const data = await response.json();
-  return data;
+  const response = await instance.delete(`/todos/${id}`);
+  return response.data;
 }
 
 main();
