@@ -4,8 +4,12 @@ const apiRoot = "http://localhost:8000/api";
 
 async function main() {
   setupEventListeners();
-  const todos = await getTodos();
-  todos.forEach((todo) => renderTodo(todo));
+  try {
+    const todos = await getTodos();
+    todos.forEach((todo) => renderTodo(todo));
+  } catch (error) {
+    alert("Failed to load todos!");
+  }
 }
 
 function setupEventListeners() {
@@ -25,10 +29,15 @@ function setupEventListeners() {
       alert("Please enter a todo description!");
       return;
     }
-    const todo = await createTodo({ title, description });
+    try {
+      const todo = await createTodo({ title, description });
+      renderTodo(todo);
+    } catch (error) {
+      alert("Failed to create todo!");
+      return;
+    }
     todoInput.value = "";
     todoDescriptionInput.value = "";
-    renderTodo(todo);
   });
 }
 
@@ -36,7 +45,6 @@ async function deleteTodoElement(id) {
   try {
     await deleteTodoById(id);
   } catch (error) {
-    console.log(error);
     alert("Failed to delete todo!");
   } finally {
     const todo = document.getElementById(id);
