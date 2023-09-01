@@ -113,3 +113,17 @@ Server is running on port http://localhost:8000
 ```
 
 Next time you can just have to run `yarn start` to start the server. Step 1-4 are only needed for the first time.
+
+### 6. MongoDB setup
+1. See this awesome tutorial: https://youtu.be/O5cmLDVTgAs?si=CNNLtl9m7kX7GbFh (2:01:08 - 2:03:00)
+2. Copy the connection string.
+3. Add the following line in `backend/.env` file
+  ```bash
+  MONGO_URI=<your connection string>
+  ```
+4. Install dependencies
+  ```bash
+  cd backend
+  yarn add mongoose
+  ```
+
