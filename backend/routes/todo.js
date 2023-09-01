@@ -3,7 +3,7 @@ import {
   getTodos,
   updateTodo,
   deleteTodo,
-} from "../controllers/todo";
+} from "../controllers/todo.js";
 import express from "express";
 
 // Create an express router
