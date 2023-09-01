@@ -1,63 +1,67 @@
+/* global axios */
 const itemTemplate = document.querySelector("#todo-item-template");
 const todoList = document.querySelector("#todos");
 
-const todos = [
-  {
-    id: uuid(),
-    title: "Todo 1",
-    description: "This is the first todo",
-    completed: false,
-  },
-  {
-    id: uuid(),
-    title: "Todo 2",
-    description: "This is the second todo",
-    completed: true,
-  },
-];
+const instance = axios.create({
+  baseURL: "http://localhost:8000/api",
+});
 
-function main() {
+async function main() {
   setupEventListeners();
-  todos.forEach((todo) => {
-    renderTodoItem(todo);
-  });
+  try {
+    const todos = await getTodos();
+    todos.forEach((todo) => renderTodo(todo));
+  } catch (error) {
+    alert("Failed to load todos!");
+  }
 }
 
 function setupEventListeners() {
   const addTodoButton = document.querySelector("#todo-add");
   const todoInput = document.querySelector("#todo-input");
   const todoDescriptionInput = document.querySelector(
-    "#todo-description-input"
+    "#todo-description-input",
   );
-  addTodoButton.addEventListener("click", () => {
-    if (!todoInput.value) {
+  addTodoButton.addEventListener("click", async () => {
+    const title = todoInput.value;
+    const description = todoDescriptionInput.value;
+    if (!title) {
       alert("Please enter a todo title!");
       return;
     }
-    const todo = {
-      id: uuid(),
-      title: todoInput.value,
-      description: todoDescriptionInput.value,
-      completed: false,
-    };
+    if (!description) {
+      alert("Please enter a todo description!");
+      return;
+    }
+    try {
+      const todo = await createTodo({ title, description });
+      renderTodo(todo);
+    } catch (error) {
+      alert("Failed to create todo!");
+      return;
+    }
     todoInput.value = "";
     todoDescriptionInput.value = "";
-    renderTodoItem(todo);
   });
 }
 
-function deleteTodoItem(id) {
-  const todo = document.getElementById(id);
-  todo.remove();
-  console.log(`Deleted todo with id: ${id}`);
+async function deleteTodoElement(id) {
+  try {
+    await deleteTodoById(id);
+  } catch (error) {
+    alert("Failed to delete todo!");
+  } finally {
+    const todo = document.getElementById(id);
+    todo.remove();
+  }
 }
 
-function renderTodoItem(todo) {
-  const item = createTodoItem(todo);
+function renderTodo(todo) {
+  const item = createTodoElement(todo);
   todoList.appendChild(item);
 }
 
-function createTodoItem(todo) {
+function createTodoElement(todo) {
   const item = itemTemplate.content.cloneNode(true);
   const container = item.querySelector(".todo-item");
   container.id = todo.id;
@@ -71,13 +75,30 @@ function createTodoItem(todo) {
   const deleteButton = item.querySelector("button.delete-todo");
   deleteButton.dataset.id = todo.id;
   deleteButton.addEventListener("click", () => {
-    deleteTodoItem(todo.id);
+    deleteTodoElement(todo.id);
   });
   return item;
 }
 
-function uuid() {
-  return crypto.randomUUID();
+async function getTodos() {
+  const response = await instance.get("/todos");
+  return response.data;
+}
+
+async function createTodo(todo) {
+  const response = await instance.post("/todos", todo);
+  return response.data;
+}
+
+// eslint-disable-next-line no-unused-vars
+async function updateTodoStatus(id, todo) {
+  const response = await instance.put(`/todos/${id}`, todo);
+  return response.data;
+}
+
+async function deleteTodoById(id) {
+  const response = await instance.delete(`/todos/${id}`);
+  return response.data;
 }
 
 main();
