@@ -2,3 +2,5 @@ node_modules
 # dotenv environment variable files
 .env
 .env.local
+
+.DS_Store

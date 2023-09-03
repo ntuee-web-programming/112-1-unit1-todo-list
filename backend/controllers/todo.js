@@ -5,6 +5,7 @@ export const getTodos = async (req, res) => {
   try {
     // Find all todos
     const todos = await TodoModel.find({});
+
     // Return todos
     return res.status(200).json(todos);
   } catch (error) {
@@ -20,14 +21,14 @@ export const getTodos = async (req, res) => {
 export const createTodo = async (req, res) => {
   const { title, description } = req.body;
 
-  // check title and description
+  // Check title and description
   if (!title || !description) {
     return res
       .status(400)
       .json({ message: "Title and description are required!" });
   }
 
-  // create a new todo
+  // Create a new todo
   try {
     const newTodo = await TodoModel.create({
       title,
@@ -52,13 +53,17 @@ export const updateTodo = async (req, res) => {
       return res.status(404).json({ message: "Todo not found!" });
     }
 
-    // update the todo
+    // Update the todo
     if (title !== undefined) existedTodo.title = title;
     if (description !== undefined) existedTodo.description = description;
     if (completed !== undefined) existedTodo.completed = completed;
 
-    // save the updated todo
+    // Save the updated todo
     await existedTodo.save();
+
+    // Rename _id to id
+    existedTodo.id = existedTodo._id;
+    delete existedTodo._id;
 
     return res.status(200).json(existedTodo);
   } catch (error) {
