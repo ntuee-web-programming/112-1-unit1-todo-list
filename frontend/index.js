@@ -65,6 +65,7 @@ function createTodoElement(todo) {
   const item = itemTemplate.content.cloneNode(true);
   const container = item.querySelector(".todo-item");
   container.id = todo.id;
+  console.log(todo)
   const checkbox = item.querySelector(`input[type="checkbox"]`);
   checkbox.checked = todo.completed;
   checkbox.dataset.id = todo.id;
