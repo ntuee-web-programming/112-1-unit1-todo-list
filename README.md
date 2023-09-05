@@ -1,4 +1,8 @@
-# 112-1-unit1
+# 112-1-unit1-todo-list
+
+This repository is for the first and second week of the course.
+In the first week, we will build a simple todo list app with pure JavaScript and Node.js Express.
+In the second week, we will add MongoDB to the app, and we will also introduce Axios, a powerful HTTP client for the browser and Node.js.
 
 ## API documentation
 
@@ -78,7 +82,7 @@ yarn add -D eslint prettier eslint-config-prettier
 
 ### 3. configure eslint and prettier
 
-eslint come with abuilt-in command to create a config file to provide a good starting point. You can run the following command to create a `.eslintrc.js` file. You'll be prompted several questions about your project. For this project, answer these questions like so.
+eslint come with a built-in command to create a config file to provide a good starting point. You can run the following command to create a `.eslintrc.js` file. You'll be prompted several questions about your project. For this project, answer these questions like so.
 
 ```text
 $ yarn eslint --init
@@ -210,9 +214,62 @@ module.exports = {
 };
 ```
 
+## Frontend Setup
+
+### 1. Create html, css, and js files (week 1)
+
+```bash
+mkdir frontend
+cd frontend
+touch index.html style.css script.js
+```
+
+### 2. Add some lines in `index.html` (week 1)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head></head>
+  <body></body>
+</html>
+```
+
+### 3. Import css and js files in `index.html` (week 1)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="index.js"></script>
+  </head>
+  <body></body>
+</html>
+```
+
+### 4. Run frontend (week 1)
+
+Simply click `index.html` in your file explorer to open it in your browser.
+
+### 5. Install dependencies (week 2)
+
+We need to install `axios` to make HTTP requests to the backend server. Add the following line in the `head` tag in `index.html` file.
+
+```html
+<head>
+  ...
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+    integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+</head>
+```
+
 ## Backend Setup
 
-### 1. Create a backend directory and initialize a new Node.js project
+### 1. Create a backend directory and initialize a new Node.js project (week 1)
 
 ```bash
 mkdir backend
@@ -220,7 +277,9 @@ cd backend
 yarn init -y
 ```
 
-### 2. Add some lines in `package.json`
+### 2. Add some lines in `package.json` (week 1)
+
+If you already have the `scripts` field in `package.json`, add `"start": "nodemon index.js"` to the `scripts` field. Otherwise, add the following lines in `package.json` file.
 
 ```json
 {
@@ -233,7 +292,7 @@ yarn init -y
 }
 ```
 
-### 3. Environment variables setting:
+### 3. Environment variables setting (week 1)
 
 - In `/backend` directory, create a file named `.env`
 - Add some lines in `.env`
@@ -242,7 +301,7 @@ yarn init -y
   ```
   Remember to add `.env` to `.gitignore` file. This is to prevent sensitive information from being exposed.
 
-### 4. Install dependencies
+### 4. Install dependencies (week 1)
 
 ```bash
 cd backend
@@ -251,7 +310,7 @@ yarn add express cors body-parser uuid
 
 Remember to add `node_modules` to `.gitignore` file. This is because dependency files are large and not necessary to be uploaded to GitHub. You can always install dependencies by `yarn install` or `npm install` when you clone the project.
 
-### 5. Run the server
+### 5. Run the server (week 1)
 
 ```bash
 cd backend
@@ -266,7 +325,7 @@ Server is running on port http://localhost:8000
 
 Next time you can just have to run `yarn start` to start the server. Step 1-4 are only needed for the first time.
 
-### 6. MongoDB setup
+### 6. MongoDB setup (week 2)
 
 1. See this awesome tutorial: https://youtu.be/O5cmLDVTgAs?si=CNNLtl9m7kX7GbFh (2:01:08 - 2:03:00)
 2. Copy the connection string.
