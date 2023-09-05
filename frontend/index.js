@@ -41,17 +41,6 @@ function setupEventListeners() {
   });
 }
 
-async function deleteTodoElement(id) {
-  try {
-    await deleteTodoById(id);
-  } catch (error) {
-    alert("Failed to delete todo!");
-  } finally {
-    const todo = document.getElementById(id);
-    todo.remove();
-  }
-}
-
 function renderTodo(todo) {
   const item = createTodoElement(todo);
   todoList.appendChild(item);
@@ -74,6 +63,17 @@ function createTodoElement(todo) {
     deleteTodoElement(todo.id);
   });
   return item;
+}
+
+async function deleteTodoElement(id) {
+  try {
+    await deleteTodoById(id);
+  } catch (error) {
+    alert("Failed to delete todo!");
+  } finally {
+    const todo = document.getElementById(id);
+    todo.remove();
+  }
 }
 
 async function getTodos() {
