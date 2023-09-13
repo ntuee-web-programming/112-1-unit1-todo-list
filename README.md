@@ -62,6 +62,47 @@ In the second week, we will add MongoDB to the app, and we will also introduce A
 }
 ```
 
+## Run the project
+
+If you only want to run the project, you can follow the steps below.
+
+### 1. Clone the project
+
+```bash
+git clone https://github.com/ntuee-web-programming/112-1-unit1-todo-list.git
+```
+
+### 2. Install dependencies
+
+```bash
+cd backend
+yarn
+```
+
+### 3. Run the server
+
+```bash
+yarn start
+```
+
+### 4. Open the frontend
+
+Open `frontend/index.html` by clicking it in your file explorer.
+
+Or if you're on ubuntu, you can run the following command to open it in your browser.
+
+```bash
+cd frontend
+xdg-open index.html
+```
+
+If you're on macOS, you can run the following command to open it in your browser.
+
+```bash
+cd frontend
+open index.html
+```
+
 ## Frontend eslint and prettier Setup
 
 ### 1. Create a frontend directory and initialize a new Node.js project for eslint and prettier
@@ -82,7 +123,7 @@ yarn add -D eslint prettier eslint-config-prettier
 
 ### 3. configure eslint and prettier
 
-eslint come with abuilt-in command to create a config file to provide a good starting point. You can run the following command to create a `.eslintrc.js` file. You'll be prompted several questions about your project. For this project, answer these questions like so.
+eslint come with a built-in command to create a config file to provide a good starting point. You can run the following command to create a `.eslintrc.js` file. You'll be prompted several questions about your project. For this project, answer these questions like so.
 
 ```text
 $ yarn eslint --init
@@ -248,6 +289,7 @@ touch index.html style.css script.js
 ```
 
 ### 4. Run frontend (week 1)
+<<<<<<< HEAD
 Simply click `index.html` in your file explorer to open it in your browser.
 
 ### 5. Install dependencies (week 2)
@@ -256,6 +298,19 @@ We need to install `axios` to make HTTP requests to the backend server. Add the 
 <head>
   ...
  <script
+=======
+
+Simply click `index.html` in your file explorer to open it in your browser.
+
+### 5. Install dependencies (week 2)
+
+We need to install `axios` to make HTTP requests to the backend server. Add the following line in the `head` tag in `index.html` file.
+
+```html
+<head>
+  ...
+  <script
+>>>>>>> 4a4f90a9b7e90a62f2d1fa85cd6fb55b907e758e
     src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
     integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
     crossorigin="anonymous"
@@ -276,10 +331,12 @@ yarn init -y
 
 ### 2. Add some lines in `package.json` (week 1)
 
+If you already have the `scripts` field in `package.json`, add `"start": "nodemon index.js"` to the `scripts` field. Otherwise, add the following lines in `package.json` file.
+
 ```json
 {
   ...
-  "types": "module",
+  "type": "module",
   "scripts": {
     "start": "nodemon index.js",
   },

@@ -45,17 +45,6 @@ function setupEventListeners() {
   });
 }
 
-async function deleteTodoElement(id) {
-  try {
-    await deleteTodoById(id);
-  } catch (error) {
-    alert("Failed to delete todo!");
-  } finally {
-    const todo = document.getElementById(id);
-    todo.remove();
-  }
-}
-
 function renderTodo(todo) {
   const item = createTodoElement(todo);
   todoList.appendChild(item);
@@ -65,7 +54,7 @@ function createTodoElement(todo) {
   const item = itemTemplate.content.cloneNode(true);
   const container = item.querySelector(".todo-item");
   container.id = todo.id;
-  console.log(todo)
+  console.log(todo);
   const checkbox = item.querySelector(`input[type="checkbox"]`);
   checkbox.checked = todo.completed;
   checkbox.dataset.id = todo.id;
@@ -79,6 +68,17 @@ function createTodoElement(todo) {
     deleteTodoElement(todo.id);
   });
   return item;
+}
+
+async function deleteTodoElement(id) {
+  try {
+    await deleteTodoById(id);
+  } catch (error) {
+    alert("Failed to delete todo!");
+  } finally {
+    const todo = document.getElementById(id);
+    todo.remove();
+  }
 }
 
 async function getTodos() {
