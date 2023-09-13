@@ -327,7 +327,7 @@ Next time you can just have to run `yarn start` to start the server. Step 1-4 ar
 3. Add the following line in `backend/.env` file
 
 ```bash
-MONGO_URI=<your connection string>
+MONGO_URL=<your connection string>
 ```
 
 4. Install dependencies
