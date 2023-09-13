@@ -284,7 +284,7 @@ If you already have the `scripts` field in `package.json`, add `"start": "nodemo
 ```json
 {
   ...
-  "types": "module",
+  "type": "module",
   "scripts": {
     "start": "nodemon index.js",
   },
