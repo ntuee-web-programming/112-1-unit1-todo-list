@@ -62,6 +62,47 @@ In the second week, we will add MongoDB to the app, and we will also introduce A
 }
 ```
 
+## Run the project
+
+If you only want to run the project, you can follow the steps below.
+
+### 1. Clone the project
+
+```bash
+git clone https://github.com/ntuee-web-programming/112-1-unit1-todo-list.git
+```
+
+### 2. Install dependencies
+
+```bash
+cd backend
+yarn
+```
+
+### 3. Run the server
+
+```bash
+yarn start
+```
+
+### 4. Open the frontend
+
+Open `frontend/index.html` by clicking it in your file explorer.
+
+Or if you're on ubuntu, you can run the following command to open it in your browser.
+
+```bash
+cd frontend
+xdg-open index.html
+```
+
+If you're on macOS, you can run the following command to open it in your browser.
+
+```bash
+cd frontend
+open index.html
+```
+
 ## Frontend eslint and prettier Setup
 
 ### 1. Create a frontend directory and initialize a new Node.js project for eslint and prettier
