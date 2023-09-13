@@ -289,6 +289,16 @@ touch index.html style.css script.js
 ```
 
 ### 4. Run frontend (week 1)
+<<<<<<< HEAD
+Simply click `index.html` in your file explorer to open it in your browser.
+
+### 5. Install dependencies (week 2)
+We need to install `axios` to make HTTP requests to the backend server. Add the following line in the `head` tag in `index.html` file.
+```html
+<head>
+  ...
+ <script
+=======
 
 Simply click `index.html` in your file explorer to open it in your browser.
 
@@ -300,6 +310,7 @@ We need to install `axios` to make HTTP requests to the backend server. Add the 
 <head>
   ...
   <script
+>>>>>>> 4a4f90a9b7e90a62f2d1fa85cd6fb55b907e758e
     src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
     integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
     crossorigin="anonymous"
@@ -373,7 +384,7 @@ Next time you can just have to run `yarn start` to start the server. Step 1-4 ar
 3. Add the following line in `backend/.env` file
 
 ```bash
-MONGO_URI=<your connection string>
+MONGO_URL=<your connection string>
 ```
 
 4. Install dependencies
